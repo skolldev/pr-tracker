@@ -1,0 +1,8 @@
+{
+  "cSpell.words": ["Deadlift"],
+  "editor.formatOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.tslint": true,
+    "source.fixAll.eslint": true
+  }
+}
