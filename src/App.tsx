@@ -1,22 +1,37 @@
 import React, { useState } from "react";
 import "./tailwind.css";
+import { EnterPR } from "./EnterPR";
+import { RetrievePR } from "./RetrievePR";
+import { Styles } from "./css/styles";
+import DataContext from "./DataContext";
 
 enum States {
   NONE,
   NEW,
   RETRIEVE
 }
-const App = () => {
+const App = (): JSX.Element => {
   const [state, setState] = useState(States.NEW);
+
+  const getContent = (currentState: States): JSX.Element => {
+    switch (currentState) {
+      case States.NEW:
+        return <EnterPR />;
+      case States.RETRIEVE:
+        return <RetrievePR />;
+      default:
+        return <p>Default</p>;
+    }
+  };
 
   return (
     <div className="v-screen h-screen flex flex-col items-center font-sans antialiased p-8 bg-blue-900 text-white">
-      {/* <h1 className="text-4xl font-bold">PR Tracker</h1> */}
+      <h1 className="text-4xl font-bold">PR Tracker</h1>
       <div className="my-auto flex flex-col bg-white text-blue-900 max-w-xl rounded-lg shadow-md">
         <div className="flex w-full">
           <button
             onClick={(): void => setState(States.NEW)}
-            className={`appearance-none focus:outline-none w-1/2 py-2 text-xl hover:bg-gray-300 hover:border-gray-300 rounded-tl-lg border-b-2 ${
+            className={`${Styles.Tab} rounded-tl-lg  ${
               state === States.NEW
                 ? "bg-gray-400 border-gray-400"
                 : "border-gray-300"
@@ -31,7 +46,7 @@ const App = () => {
           />
           <button
             onClick={(): void => setState(States.RETRIEVE)}
-            className={`appearance-none focus:outline-none w-1/2 py-2 text-xl hover:bg-gray-300 hover:border-gray-300 rounded-tr-lg border-b-2 ${
+            className={`${Styles.Tab} rounded-tr-lg ${
               state === States.RETRIEVE
                 ? "bg-gray-400 border-gray-400"
                 : "border-gray-300"
@@ -40,32 +55,12 @@ const App = () => {
             Retrieve
           </button>
         </div>
-        <div className="div p-8">
-          {state === States.NEW ? (
-            <EnterPR />
-          ) : state === States.RETRIEVE ? (
-            <RetrievePR />
-          ) : (
-            <p>Oops</p>
-          )}
-        </div>
+        <DataContext.Provider value={{}}>
+          <div className="div p-8">{getContent(state)}</div>
+        </DataContext.Provider>
       </div>
     </div>
   );
 };
-
-const EnterPR = (props: any) => {
-  const [result, setResult] = useState(null);
-  return result ? (
-    <div>Wohoo!</div>
-  ) : (
-    <div className="grid gap-2 grid-cols-2">
-      <input className="border-2 border-gray-400" />
-      <input className="border-2 border-gray-400" />
-      <input className="border-2 border-gray-400" />
-    </div>
-  );
-};
-const RetrievePR = (props: any) => <></>;
 
 export default App;
