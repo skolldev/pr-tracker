@@ -97,6 +97,7 @@ export const Base = (props: Props): JSX.Element => {
                 <label className="block">
                   <span className="block">Exercise</span>
                   <input
+                    autoFocus
                     type="text"
                     name="exercise"
                     className={Styles.Input}
