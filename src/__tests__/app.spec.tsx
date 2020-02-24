@@ -2,12 +2,19 @@
 import React from "react";
 import { render } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { axe } from "jest-axe";
 import App from "../App";
 import { TestHelper } from "../helpers/test-helper";
 
 beforeEach(() => {
   jest.spyOn(window.localStorage.__proto__, "setItem");
   window.localStorage.__proto__.setItem = jest.fn();
+});
+
+test("should be accessible", async () => {
+  const { container } = render(<App />);
+  const result = await axe(container);
+  expect(result).toHaveNoViolations();
 });
 
 test("should catch common errors", async () => {
