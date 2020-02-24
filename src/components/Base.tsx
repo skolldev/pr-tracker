@@ -108,6 +108,7 @@ export const Base = (props: Props): JSX.Element => {
                 <label className="block">
                   <span className="block">Weight</span>
                   <input
+                    autoComplete="off"
                     type="text"
                     name="weight"
                     className={Styles.Input}
@@ -118,6 +119,7 @@ export const Base = (props: Props): JSX.Element => {
                 <label className="block">
                   <span className="block">Reps</span>
                   <input
+                    autoComplete="off"
                     type="text"
                     name="reps"
                     className={Styles.Input}
