@@ -1,6 +1,6 @@
-import React, { createContext, Component } from "react";
+import React, { createContext } from "react";
 import { ILibrary } from "./models/library.interface";
-import { useLocalStorage } from "./local-storage-state";
+import { useLocalStorage } from "./helpers/local-storage-state";
 
 export interface IExerciseDataContext {
   data: ILibrary;
@@ -13,10 +13,10 @@ const ExerciseDataContext = createContext<IExerciseDataContext>({
 });
 
 interface Props {
-  children: Component;
+  children: React.ReactNode;
 }
 
-export const ExerciseDataProvider = (props: any) => {
+export const ExerciseDataProvider = (props: Props): JSX.Element => {
   const [data, updateData] = useLocalStorage("data", {});
 
   const state = {
