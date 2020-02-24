@@ -51,6 +51,6 @@ test("should allow user to enter PR", async () => {
   userEvent.click(submit);
 
   expect(
-    getByText(/You set a new PR for squat with 125 x 5!/i)
+    getByText(/You set a new repetition PR for squat with 125 x 5!/i)
   ).toBeInTheDocument();
 });

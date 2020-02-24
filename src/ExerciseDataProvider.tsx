@@ -1,5 +1,6 @@
-import React, { createContext } from "react";
+import React, { createContext, Component } from "react";
 import { ILibrary } from "./models/library.interface";
+import { useLocalStorage } from "./local-storage-state";
 
 export interface IExerciseDataContext {
   data: ILibrary;
@@ -11,26 +12,23 @@ const ExerciseDataContext = createContext<IExerciseDataContext>({
   updateData: () => {}
 });
 
-export class ExerciseDataProvider extends React.Component<
-  {},
-  IExerciseDataContext
-> {
-  updateData = (newData: ILibrary): void => {
-    this.setState({ data: newData });
-  };
-
-  state = {
-    data: {},
-    updateData: this.updateData
-  };
-
-  render(): JSX.Element {
-    return (
-      <ExerciseDataContext.Provider value={this.state}>
-        {this.props.children}
-      </ExerciseDataContext.Provider>
-    );
-  }
+interface Props {
+  children: Component;
 }
+
+export const ExerciseDataProvider = (props: any) => {
+  const [data, updateData] = useLocalStorage("data", {});
+
+  const state = {
+    data,
+    updateData
+  };
+
+  return (
+    <ExerciseDataContext.Provider value={state}>
+      {props.children}
+    </ExerciseDataContext.Provider>
+  );
+};
 
 export const ExerciseDataConsumer = ExerciseDataContext.Consumer;

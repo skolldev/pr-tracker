@@ -89,7 +89,7 @@ export const EnterPR = (props: any): JSX.Element => {
     const { exercise, weight, reps } = pr;
     if (!data[exercise].reps[reps]) {
       data[exercise].reps[reps] = weight;
-      return `Congrats! You set a new repetition PR for ${exercise} with ${weight}x${reps}!`;
+      return `Congrats! You set a new repetition PR for ${exercise} with ${weight} x ${reps}!`;
     }
 
     const previousRecord = data[exercise].reps[reps];
@@ -104,14 +104,14 @@ export const EnterPR = (props: any): JSX.Element => {
   const checkWeightPR = (data: ILibrary, pr: EnterPRInput): string | null => {
     const { exercise, weight, reps } = pr;
     if (!data[exercise].weight[weight]) {
-      data[exercise].weight[weight] = weight;
-      return `Congrats! You set a new weight PR for ${exercise} with ${weight}x${reps}!`;
+      data[exercise].weight[weight] = reps;
+      return `Congrats! You set a new weight PR for ${exercise} with ${weight} x ${reps}!`;
     }
 
     const previousRecord = data[exercise].weight[weight];
     if (previousRecord < +reps) {
-      data[exercise].weight[weight] = weight;
-      return `Congrats! You set a new weight PR for ${exercise} with ${weight}x${reps}, beating your previous record of ${weight} x ${previousRecord}!`;
+      data[exercise].weight[weight] = reps;
+      return `Congrats! You set a new weight PR for ${exercise} with ${weight} x ${reps}, beating your previous record of ${weight} x ${previousRecord}!`;
     }
 
     return null;
