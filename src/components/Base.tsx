@@ -45,11 +45,30 @@ export const Base = (props: Props): JSX.Element => {
     });
   };
 
+  const del = ({ exercise }: Input, context: IExerciseDataContext): void => {
+    const { data, updateData } = context;
+    const exerciseToDelete = exercise
+      .trim()
+      .split(" ")
+      .slice(1)
+      .join("")
+      .toLowerCase();
+    const newData = { ...data };
+    delete newData[exerciseToDelete];
+    updateData(newData);
+    reset();
+  };
+
   const handleSubmit = (
     e: React.FormEvent<HTMLFormElement>,
     exerciseData: IExerciseDataContext
   ): void => {
     e.preventDefault();
+
+    if (input.exercise.startsWith("delete")) {
+      del(input, exerciseData);
+      return;
+    }
 
     const errorMessage = props.validateInput(input);
     setError(errorMessage);
