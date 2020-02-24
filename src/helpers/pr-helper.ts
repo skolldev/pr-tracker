@@ -49,21 +49,21 @@ export class PRHelper {
   static retrievePR(data: ILibrary, pr: EnterPRInput): string | null {
     const { exercise, weight, reps } = pr;
     if (!data[exercise]) {
-      return null;
+      return `You currently don't have any recorded PRs for ${exercise}!`;
     }
 
     if (weight) {
       const result = data[exercise].weight[weight];
       return result
         ? `Your current PR for ${weight} is ${result} reps!`
-        : `You currently don't have any recorded PRs for ${weight}`;
+        : `You currently don't have any recorded ${exercise} PRs for ${weight}`;
     }
 
     if (reps) {
       const result = data[exercise].reps[reps];
       return result
         ? `Your current PR for ${reps} reps is ${result}!`
-        : `You currently don't have any recorded PRs for ${reps} reps`;
+        : `You currently don't have any recorded ${exercise} PRs for ${reps} reps`;
     }
     return null;
   }
