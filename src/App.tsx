@@ -3,7 +3,7 @@ import "./tailwind.css";
 import { EnterPR } from "./EnterPR";
 import { RetrievePR } from "./RetrievePR";
 import { Styles } from "./css/styles";
-import DataContext from "./DataContext";
+import { ExerciseDataProvider } from "./ExerciseDataProvider";
 
 enum States {
   NONE,
@@ -27,37 +27,30 @@ const App = (): JSX.Element => {
   return (
     <div className="v-screen h-screen flex flex-col items-center font-sans antialiased p-8 bg-blue-900 text-white">
       <h1 className="text-4xl font-bold">PR Tracker</h1>
-      <div className="my-auto flex flex-col bg-white text-blue-900 max-w-xl rounded-lg shadow-md">
+      <div className="my-auto flex flex-col bg-white text-blue-900 w-full md:max-w-xl rounded-lg shadow-md">
         <div className="flex w-full">
           <button
             onClick={(): void => setState(States.NEW)}
             className={`${Styles.Tab} rounded-tl-lg  ${
-              state === States.NEW
-                ? "bg-gray-400 border-gray-400"
-                : "border-gray-300"
+              state === States.NEW ? "bg-white" : "bg-gray-700 text-gray-400"
             }`}
           >
             New
           </button>
-          <div
-            className={`border-r-2 ${
-              state === States.NONE ? "border-gray-300" : "border-gray-400"
-            }`}
-          />
           <button
             onClick={(): void => setState(States.RETRIEVE)}
             className={`${Styles.Tab} rounded-tr-lg ${
               state === States.RETRIEVE
-                ? "bg-gray-400 border-gray-400"
-                : "border-gray-300"
+                ? "bg-white"
+                : "bg-gray-700 text-gray-400"
             }`}
           >
             Retrieve
           </button>
         </div>
-        <DataContext.Provider value={{}}>
+        <ExerciseDataProvider>
           <div className="div p-8">{getContent(state)}</div>
-        </DataContext.Provider>
+        </ExerciseDataProvider>
       </div>
     </div>
   );

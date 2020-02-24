@@ -1,4 +1,4 @@
-import { IExerciseData } from "./exercise-data.interface";
+import { IExerciseData } from "./exercise-rep-data.interface";
 
 export interface ILibrary {
   [exercise: string]: IExerciseData;
