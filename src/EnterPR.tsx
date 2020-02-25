@@ -39,9 +39,11 @@ export const EnterPR = (): JSX.Element => {
       ]}
     >
       <>
-        You can enter the <strong>exercise</strong> you did and the{" "}
-        <strong>reps</strong> and <strong>weight</strong> you lifted and the
-        system will save your records.
+        <p>
+          You can enter the <strong>exercise</strong> you did and the{" "}
+          <strong>reps</strong> and <strong>weight</strong> you lifted and the
+          system will save your records.
+        </p>
         <p>
           To delete all saved data for an exercise, simply enter{" "}
           <em>delete exerciseName</em> into the exercise field and press Go.

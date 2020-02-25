@@ -111,7 +111,7 @@ export const Base = (props: Props): JSX.Element => {
             </div>
           ) : (
             <form onSubmit={(e): void => handleSubmit(e, exerciseData)}>
-              <p>{props.children}</p>
+              {props.children}
               <div className="mt-4 grid gap-4 grid-cols-1">
                 <label className="block" htmlFor="exercise">
                   <span className="block">Exercise</span>
@@ -130,7 +130,7 @@ export const Base = (props: Props): JSX.Element => {
                   <input
                     id="weight"
                     autoComplete="off"
-                    type="text"
+                    type="number"
                     name="weight"
                     className={Styles.Input}
                     onChange={handleInput}
@@ -142,7 +142,7 @@ export const Base = (props: Props): JSX.Element => {
                   <input
                     id="reps"
                     autoComplete="off"
-                    type="text"
+                    type="number"
                     name="reps"
                     className={Styles.Input}
                     onChange={handleInput}

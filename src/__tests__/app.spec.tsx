@@ -25,7 +25,7 @@ test("should catch common errors", async () => {
   const ex = getByLabelText(/exercise/i);
   const weight = getByLabelText(/weight/i);
   const reps = getByLabelText(/reps/i);
-  const submit = getByText(/go/i);
+  const submit = getByText(/go!/i);
 
   userEvent.click(submit);
   expect(getByText(/choose an exercise/i)).toBeInTheDocument();
@@ -38,12 +38,6 @@ test("should catch common errors", async () => {
   await userEvent.type(reps, "asd");
   userEvent.click(submit);
   expect(getByText(/enter either weight or reps/i)).toBeInTheDocument();
-
-  TestHelper.clearField(weight);
-  userEvent.click(submit);
-  expect(
-    getByText(/reps you entered are not a valid number!/i)
-  ).toBeInTheDocument();
 });
 
 test("should allow user to enter and retrieve PR", async () => {
@@ -52,12 +46,12 @@ test("should allow user to enter and retrieve PR", async () => {
   await userEvent.type(getByLabelText(/exercise/i), "squat");
   await userEvent.type(getByLabelText(/weight/i), "125");
   await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go/i));
+  userEvent.click(getByText(/go!/i));
 
   userEvent.click(getByText(/retrieve/i));
   await userEvent.type(getByLabelText(/exercise/i), "squat");
   await userEvent.type(getByLabelText(/weight/i), "125");
-  userEvent.click(getByText(/go/i));
+  userEvent.click(getByText(/go!/i));
 
   expect(getByText(/your current pr for 125 is 5 reps!/i));
 });
@@ -68,7 +62,7 @@ test("should tell user if there are no records", async () => {
   userEvent.click(getByText(/retrieve/i));
   await userEvent.type(getByLabelText(/exercise/i), "squat");
   await userEvent.type(getByLabelText(/reps/i), "7");
-  userEvent.click(getByText(/go/i));
+  userEvent.click(getByText(/go!/i));
 
   expect(getByText(/you currently don't have any recorded prs for squat/i));
 
@@ -77,12 +71,12 @@ test("should tell user if there are no records", async () => {
   await userEvent.type(getByLabelText(/exercise/i), "squat");
   await userEvent.type(getByLabelText(/weight/i), "125");
   await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go/i));
+  userEvent.click(getByText(/go!/i));
 
   userEvent.click(getByText(/retrieve/i));
   await userEvent.type(getByLabelText(/exercise/i), "squat");
   await userEvent.type(getByLabelText(/reps/i), "7");
-  userEvent.click(getByText(/go/i));
+  userEvent.click(getByText(/go!/i));
 
   expect(
     getByText(/you currently don't have any recorded squat prs for 7 reps/i)

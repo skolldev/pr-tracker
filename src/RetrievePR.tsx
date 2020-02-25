@@ -28,9 +28,11 @@ export const RetrievePR = (): JSX.Element => {
 
   return (
     <Base validateInput={validateInput} resultFuncs={[PRHelper.retrievePR]}>
-      Enter an <strong>exercise</strong> and the <strong>reps</strong> or{" "}
-      <strong>weight</strong> you want to check your PR for and the system will
-      tell you!
+      <p>
+        Enter an <strong>exercise</strong> and the <strong>reps</strong> or{" "}
+        <strong>weight</strong> you want to check your PR for and the system
+        will tell you!
+      </p>
     </Base>
   );
 };
