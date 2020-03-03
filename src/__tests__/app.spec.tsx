@@ -18,14 +18,14 @@ test("should be accessible", async () => {
 });
 
 test("should catch common errors", async () => {
-  const { getByText, getByLabelText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
 
   userEvent.click(getByText(/retrieve/i));
 
-  const ex = getByLabelText(/exercise/i);
-  const weight = getByLabelText(/weight/i);
-  const reps = getByLabelText(/reps/i);
-  const submit = getByText(/go!/i);
+  const ex = getByPlaceholderText(/exercise/i);
+  const weight = getByPlaceholderText(/weight/i);
+  const reps = getByPlaceholderText(/reps/i);
+  const submit = getByText(/check$/i);
 
   userEvent.click(submit);
   expect(getByText(/choose an exercise/i)).toBeInTheDocument();
@@ -41,42 +41,42 @@ test("should catch common errors", async () => {
 });
 
 test("should allow user to enter and retrieve PR", async () => {
-  const { getByText, getByLabelText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   userEvent.click(getByText(/retrieve/i));
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  userEvent.click(getByText(/check$/i));
 
   expect(getByText(/your current pr for 125 is 5 reps!/i));
 });
 
 test("should tell user if there are no records", async () => {
-  const { getByText, getByLabelText } = render(<App />);
+  const { getByText, getByPlaceholderText } = render(<App />);
 
   userEvent.click(getByText(/retrieve/i));
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/reps/i), "7");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/reps/i), "7");
+  userEvent.click(getByText(/check$/i));
 
   expect(getByText(/you currently don't have any recorded prs for squat/i));
 
-  userEvent.click(getByText(/new/i));
+  userEvent.click(getByText(/enter/i));
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   userEvent.click(getByText(/retrieve/i));
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/reps/i), "7");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/reps/i), "7");
+  userEvent.click(getByText(/check$/i));
 
   expect(
     getByText(/you currently don't have any recorded squat prs for 7 reps/i)

@@ -31,6 +31,7 @@ export const EnterPR = (): JSX.Element => {
 
   return (
     <Base
+      buttonText="Save"
       validateInput={validateInput}
       resultFuncs={[
         PRHelper.checkExercisePR,

@@ -27,7 +27,11 @@ export const RetrievePR = (): JSX.Element => {
   };
 
   return (
-    <Base validateInput={validateInput} resultFuncs={[PRHelper.retrievePR]}>
+    <Base
+      buttonText="Check"
+      validateInput={validateInput}
+      resultFuncs={[PRHelper.retrievePR]}
+    >
       <p>
         Enter an <strong>exercise</strong> and the <strong>reps</strong> or{" "}
         <strong>weight</strong> you want to check your PR for and the system

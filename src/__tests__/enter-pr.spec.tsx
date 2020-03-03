@@ -18,16 +18,16 @@ test("should be accessible", async () => {
 });
 
 test("should catch common errors", async () => {
-  const { getByText, getByLabelText, queryByText } = render(
+  const { getByText, getByPlaceholderText, queryByText } = render(
     <ExerciseDataProvider>
       <EnterPR />
     </ExerciseDataProvider>
   );
 
-  const ex = getByLabelText(/exercise/i);
-  const weight = getByLabelText(/weight/i);
-  const reps = getByLabelText(/reps/i);
-  const submit = getByText(/go!/i);
+  const ex = getByPlaceholderText(/exercise name/i);
+  const weight = getByPlaceholderText(/weight/i);
+  const reps = getByPlaceholderText(/reps/i);
+  const submit = getByText(/save$/i);
 
   userEvent.click(submit);
   expect(getByText(/choose an exercise/i)).toBeInTheDocument();
@@ -46,16 +46,16 @@ test("should catch common errors", async () => {
 });
 
 test("should allow user to enter PR", async () => {
-  const { getByText, getByLabelText } = render(
+  const { getByText, getByPlaceholderText } = render(
     <ExerciseDataProvider>
       <EnterPR />
     </ExerciseDataProvider>
   );
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   expect(
     getByText(/You set a new PR for squat with 125 x 5!/i)
@@ -63,25 +63,25 @@ test("should allow user to enter PR", async () => {
 
   userEvent.click(getByText(/back/i));
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   expect(getByText(/sorry, no prs/i)).toBeInTheDocument();
 });
 
 test("should track weight PRs and repetition PRs", async () => {
-  const { getByText, getByLabelText } = render(
+  const { getByText, getByPlaceholderText } = render(
     <ExerciseDataProvider>
       <EnterPR />
     </ExerciseDataProvider>
   );
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   expect(
     getByText(/You set a new PR for squat with 125 x 5!/i)
@@ -89,10 +89,10 @@ test("should track weight PRs and repetition PRs", async () => {
 
   userEvent.click(getByText(/back/i));
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "120");
-  await userEvent.type(getByLabelText(/reps/i), "5");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "120");
+  await userEvent.type(getByPlaceholderText(/reps/i), "5");
+  userEvent.click(getByText(/save$/i));
 
   expect(
     getByText(/You set a new weight PR for squat with 120 x 5!/i)
@@ -100,10 +100,10 @@ test("should track weight PRs and repetition PRs", async () => {
 
   userEvent.click(getByText(/back/i));
 
-  await userEvent.type(getByLabelText(/exercise/i), "squat");
-  await userEvent.type(getByLabelText(/weight/i), "125");
-  await userEvent.type(getByLabelText(/reps/i), "6");
-  userEvent.click(getByText(/go!/i));
+  await userEvent.type(getByPlaceholderText(/exercise/i), "squat");
+  await userEvent.type(getByPlaceholderText(/weight/i), "125");
+  await userEvent.type(getByPlaceholderText(/reps/i), "6");
+  userEvent.click(getByText(/save$/i));
 
   expect(
     getByText(/You set a new repetition PR for squat with 125 x 6/i)

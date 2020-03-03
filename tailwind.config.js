@@ -1,11 +1,13 @@
 /* eslint-disable */
+const defaultTheme = require("tailwindcss/defaultTheme");
 module.exports = {
   theme: {
-    extend: {}
+    extend: {
+      fontFamily: {
+        sans: ["Inter var", ...defaultTheme.fontFamily.sans]
+      }
+    }
   },
-  variants: {
-    backgroundColor: ["hover", "focus", "active"],
-    borderColor: ["focus", "hover"]
-  },
-  plugins: []
+  variants: {},
+  plugins: [require("@tailwindcss/ui")]
 };
